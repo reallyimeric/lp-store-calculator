@@ -1,0 +1,22 @@
+{
+  "name": "lpsc",
+  "version": "0.0.1",
+  "description": "a calculator for loyalty point store in EVE-Online",
+  "main": "main.js",
+  "dependencies": {
+    "node-fetch": "^1.5.3",
+    "sqlite3": "^3.1.4"
+  },
+  "devDependencies": {
+    "xlsx": "^0.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository" :
+  { "type" : "git",
+    "url" : "https://github.com/reallyimeric/lp-store-calculator.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

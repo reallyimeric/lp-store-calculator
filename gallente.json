@@ -1,0 +1,185 @@
+[
+  {
+    "prize": "多米尼克斯级海军型",
+    "quantity": 1,
+    "lp": 250000,
+    "isk": 0,
+    "ap": 0,
+    "require": [
+      {"name": "多米尼克斯级", "quantity": 1},
+      {"name": "盖伦特阿尔法关联芯片", "quantity": 1}
+    ]
+  },
+  {
+    "prize": "万王宝座海军型蓝图",
+    "quantity": 1,
+    "lp": 250000,
+    "isk": 20000000,
+    "ap": 0,
+    "require": []
+  },
+  {
+    "prize": "万王宝座海军型蓝图",
+    "quantity": 1,
+    "lp": 250000,
+    "isk": 0,
+    "ap": 0,
+    "require": [
+      {"name": "科尔马克·瓦加的铭牌", "quantity": 1}
+    ]
+  },
+  {
+    "prize": "万王宝座级海军型",
+    "quantity": 1,
+    "lp": 250000,
+    "isk": 0,
+    "ap": 0,
+    "require": [
+      {"name": "万王宝座级", "quantity": 1},
+      {"name": "盖伦特阿尔法关联芯片", "quantity": 1}
+    ]
+  },
+  {
+    "prize": "联邦海军大型等离子立体炸弹蓝图",
+    "quantity": 5,
+    "lp": 168750,
+    "isk": 67500000,
+    "ap": 0,
+    "require": [
+      {"name": "加达里海军准将勋章II", "quantity": 12},
+      {"name": "加达里海军中将勋章I", "quantity": 62},
+      {"name": "加达里海军上将勋章I", "quantity": 92}
+    ]
+  },
+  {
+    "prize": "联邦海军中型等离子立体炸弹蓝图",
+    "quantity": 5,
+    "lp": 135000,
+    "isk": 54000000,
+    "ap": 0,
+    "require": [
+      {"name": "加达里海军准将勋章I", "quantity": 358},
+      {"name": "加达里海军准将勋章II", "quantity": 595}
+    ]
+  },
+  {
+    "prize": "联邦海军小型等离子立体炸弹蓝图",
+    "quantity": 5,
+    "lp": 101250,
+    "isk": 40500000,
+    "ap": 0,
+    "require": [
+      {"name": "加达里海军上尉勋章I", "quantity": 504},
+      {"name": "加达里海军上尉勋章II", "quantity": 631},
+      {"name": "加达里海军上尉勋章III", "quantity": 758}
+    ]
+  },
+  {
+    "prize": "联邦海军作战思维网络芯片",
+    "quantity": 1,
+    "lp": 100000,
+    "isk": 100000000,
+    "ap": 0,
+    "require": [
+      {"name": "装甲战思维网络芯片", "quantity": 1},
+      {"name": "游击战思维网络芯片", "quantity": 1}
+    ]
+  },
+  {
+    "prize": "布鲁提克斯级海军型蓝图",
+    "quantity": 1,
+    "lp": 100000,
+    "isk": 10000000,
+    "ap": 0,
+    "require": []
+  },
+  {
+    "prize": "布鲁提克斯级海军型",
+    "quantity": 1,
+    "lp": 100000,
+    "isk": 0,
+    "ap": 0,
+    "require": [
+      {"name": "布鲁提克斯级", "quantity": 1},
+      {"name": "盖伦特贝它关联芯片", "quantity": 2}
+    ]
+  },
+  {
+    "prize": "女式'标准'衬衫(黑/白)",
+    "quantity": 1,
+    "lp": 100000,
+    "isk": 100000000,
+    "ap": 0,
+    "require": []
+  },
+  {
+    "prize": "男式'标准'衬衫(白/蓝)",
+    "quantity": 1,
+    "lp": 100000,
+    "isk": 100000000,
+    "ap": 0,
+    "require": []
+  },
+  {
+    "prize": "联邦海军350mm磁轨炮蓝图",
+    "quantity": 5,
+    "lp": 90000,
+    "isk": 36000000,
+    "ap": 0,
+    "require": [
+      {"name": "加达里海军准将勋章II", "quantity": 7},
+      {"name": "加达里海军中将勋章I", "quantity": 33},
+      {"name": "加达里海军上将勋章I", "quantity": 49}
+    ]
+  },
+  {
+    "prize": "联邦海军跃迁扰断器",
+    "quantity": 1,
+    "lp": 80000,
+    "isk": 32000000,
+    "ap": 0,
+    "require": [
+      {"name": "跃迁扰断器 I", "quantity": 1},
+      {"name": "加达里海军上将勋章I", "quantity": 10},
+      {"name": "加达里海军中将勋章I", "quantity": 5},
+      {"name": "加达里海军准将勋章II", "quantity": 1}
+    ]
+  },
+  {
+    "prize": "联邦海军跃迁扰频器",
+    "quantity": 1,
+    "lp": 80000,
+    "isk": 32000000,
+    "ap": 0,
+    "require": [
+      {"name": "跃迁扰频器 I", "quantity": 1},
+      {"name": "加达里海军上将勋章I", "quantity": 10},
+      {"name": "加达里海军中将勋章I", "quantity": 5},
+      {"name": "加达里海军准将勋章II", "quantity": 1}
+    ]
+  },
+  {
+    "prize": "埃菲尔公司 炼金术士 生物学 BY-810",
+    "quantity": 1,
+    "lp": 79375,
+    "isk": 79375000,
+    "ap": 0,
+    "require": []
+  },
+  {
+    "prize": "埃菲尔公司 炼金术士 神经毒化抵抗 NR-1005",
+    "quantity": 1,
+    "lp": 79375,
+    "isk": 79375000,
+    "ap": 0,
+    "require": []
+  },
+  {
+    "prize": "埃菲尔公司 炼金术士 神经毒化控制 NC-905",
+    "quantity": 1,
+    "lp": 79375,
+    "isk": 79375000,
+    "ap": 0,
+    "require": []
+  }
+]
