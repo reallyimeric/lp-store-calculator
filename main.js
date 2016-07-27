@@ -13,23 +13,23 @@ const target = new sqlite3.Database("./items.sqlite", sqlite3.OPEN_READONLY)
 const tableName = "items"
 const statement = target.prepare(`SELECT * FROM ${tableName} WHERE name = ?`)
 const fetch = require('node-fetch')
-console.log(gallenteProposals[0])
+
 gallenteProposals.forEach(calculate)
 
 function calculate(proposal) {
-  let price = priceof(proposal.prize).then(unitPrice => unitPrice * proposal.quantity)
+  let price = getInfo(proposal.prize).then(itemInfo => priceof(itemInfo)).then(unitPrice => unitPrice * proposal.quantity)
   let itemCost = 0
   const itemCostPromises = proposal.require.map(item => costCal(item))
   Promise.all(itemCostPromises).then(itemCosts => {
     itemCosts.forEach(item => itemCost + item)
     let cost = proposal.isk + itemCost
     let lpRatio = price.then(price => proposal.lp / ((price - cost) / 100000000 ))
-    lpRatio.then(lpRatio => console.log(`${proposal.name}*${proposal.quantity} lp: ${proposal.lp} Ratio:${lpRatio}`))
+    lpRatio.then(lpRatio => console.log(`${proposal.prize}*${proposal.quantity} lp: ${proposal.lp} Ratio:${lpRatio}`))
   })
 }
 
 function costCal(requiredItem){
-  return priceof(requiredItem).then(price => price * requiredItem.quantity)
+  return getInfo(requiredItem).then(itemInfo => priceof(itemInfo)).then(price => price * requiredItem.quantity)
 }
 
 function priceof(record){
@@ -37,7 +37,7 @@ function priceof(record){
   let url = `http://www.ceve-market.org/api/market/region/10000002/type/${id}.json`
   return fetch(url)
     .then(result => result.json())
-    .then(result => price = result.sell.min)
+    .then(result => result.sell.min)
 }
 function getInfo(name){
   return new Promise((resolve, reject) => {
