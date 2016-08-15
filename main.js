@@ -17,50 +17,59 @@ const setStatement = target.prepare(`UPDATE ${tableName} SET price=?2,time=${new
 const fetch = require('node-fetch')
 target.run("PRAGMA journal_mode = OFF")
 
-gallenteProposals.forEach(proposal => calculate(proposal))
+gallenteProposals.forEach(calculate)
 
 function calculate(proposal) {//console.log(proposal);
-  let price = getInfo(proposal.prize).then(itemInfo => priceof(itemInfo)).then(unitPrice => unitPrice * proposal.quantity)
-  let itemCost = 0
-  const itemCostPromises = proposal.require.map(item => costCal(item))
+  let price = getInfo(proposal.prize).catch(err => console.error(`[Error while getInfo ("${proposal.prize}")]: ${err}`))
+    .then(priceof).catch(err => console.error(`[Error while priceof ("${proposal.prize}")]: ${err}`))
+    .then(unitPrice => unitPrice * proposal.quantity)
+    .catch(err => console.error(`[Error while "${proposal.prize}"]: ${err}`))
+  let itemCostAll = 0       //Insteading of the old "itemCost", “itemCostAll” is now the price of all the required items
+  const itemCostPromises = proposal.require.map(costCal)
   Promise.all(itemCostPromises).then(itemCosts => {
-    itemCosts.forEach(item => itemCost + item)
-    let cost = proposal.isk + itemCost
+    itemCosts.forEach(itemCost => itemCostAll + itemCost)     //now "itemCost" is an element of array "itemCosts"
+    let cost = proposal.isk + itemCostAll
     let lpRatio = price.then(price => proposal.lp / ((price - cost) / 100000000 ))
     lpRatio.then(lpRatio => console.log(`${proposal.prize}*${proposal.quantity} lp: ${proposal.lp} Ratio:${lpRatio}`))
   })
 }
 
 function costCal(requiredItem){
-  return getInfo(requiredItem.name).then(itemInfo => priceof(itemInfo)).then(price => price * requiredItem.quantity)
+  return getInfo(requiredItem.name).catch(err => console.error(`[Error while getInfo]: ${err}`))
+    .then(priceof).catch(err => console.error(`[Error while priceof]: ${err}`))
+    .then(price => price * requiredItem.quantity)
 }
 
 function priceof(record){
+  //if (record == null) console.log('!!!!!!!!!!!!!!!!')
   let id = record.id
   if (new Date().getTime() - record.time < 1000*600) {
-    if (record.price == 0) console.log(`Warnning: price of "${record.name}" is 0, please consider setting a proper value and time`)
+    if (record.price == 0) console.error(`[Warning]: price of "${record.name}" is 0, please consider setting a proper value and time`)
     return Promise.resolve(record.price)
   }
   if (id != null){
     let url = `http://www.ceve-market.org/api/market/region/10000002/type/${id}.json`
-    return fetch(url)
-      .then(result => result.json())
+    return fetch(url).catch(err => console.error(`[Error while fetch]: ${err}`))
+      .then(result => result.json()).catch(err => console.error(`[Error while json]: ${err}`))
       .then(result => result.sell.min)
       .then(price => {
-        setStatement.run(record.name, price, err => {if (err) console.log(`setStatement failed while setting "${record.name}": ${err}`)} )
-        if (price == 0) console.log(`Warnning: price of "${record.name}" is 0, please consider setting a proper value and time`)
+        setStatement.run(record.name, price, err => {if (err) console.error(`setStatement failed while setting "${record.name}": ${err}`)} )
+        if (price == 0) console.error(`[Warning]: price of "${record.name}" is 0, please consider setting a proper value and time`)
         return price
     })
   }
   else{
-    console.log(`Warnning: ${record.name} does not have an id: set a proper value and time`)
+    console.error(`[Warning]: ${record.name} does not have an id: set a proper value and time`)
     return Promise.resolve(record.price)
   }
 }
 function getInfo(name){//console.log(name)
   return new Promise((resolve, reject) => {
     getStatement.get(name, (err, record) => {
-      if (record == null) addStatement.run(name, err => {if (err) console.log(`addStatement failed while adding "${name}": ${err}`)} )
+      if (record == null) {
+        console.error(`[Warning]: ${name} not found, inserting...`)
+        addStatement.run(name, err => {if (err) console.error(`addStatement failed while adding "${name}": ${err}`)} )
+      }
       if (err) {
         reject(err)
         return
