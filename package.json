@@ -8,14 +8,15 @@
     "sqlite3": "^3.1.4"
   },
   "devDependencies": {
+    "eslint": "^3.3.1",
     "xlsx": "^0.8.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository" :
-  { "type" : "git",
-    "url" : "https://github.com/reallyimeric/lp-store-calculator.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reallyimeric/lp-store-calculator.git"
   },
   "author": "",
   "license": "ISC"
