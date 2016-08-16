@@ -1,21 +1,21 @@
-"use strict"
+'use strict'
 const fs = require('fs')
 // const amarrStorage = fs.readFileSync("./amarr.json")
 // const amarrProposals = JSON.parse(amarrStorage)
 // const caldariStorage = fs.readFileSync("./caldari.json")
 // const caldariProposals = JSON.parse(caldariStorage)
-const gallenteStorage = fs.readFileSync("./gallente.json", "utf-8")
+const gallenteStorage = fs.readFileSync('./gallente.json', 'utf-8')
 const gallenteProposals = JSON.parse(gallenteStorage)
 // const minmatarStorage = fs.readFileSync("./minmatar.json")
 // const minmatarProposals = JSON.parse(minmatarStorage)
 const sqlite3 = require('sqlite3')
-const target = new sqlite3.Database("./items.sqlite")
-const tableName = "items"
+const target = new sqlite3.Database('./items.sqlite')
+const tableName = 'items'
 const getStatement = target.prepare(`SELECT * FROM ${tableName} WHERE name = ?`)
-const addStatement = target.prepare(`INSERT INTO ${tableName} (name) VALUES(?1)`)
+//const addStatement = target.prepare(`INSERT INTO ${tableName} (name) VALUES(?1)`)
 const setStatement = target.prepare(`UPDATE ${tableName} SET price=?2,time=${new Date().getTime()} WHERE name = ?1`)
 const fetch = require('node-fetch')
-target.run("PRAGMA journal_mode = OFF")
+target.run('PRAGMA journal_mode = OFF')
 
 gallenteProposals.forEach(calculate)
 
@@ -56,7 +56,7 @@ function priceof(record){
         setStatement.run(record.name, price, err => {if (err) console.error(`setStatement failed while setting "${record.name}": ${err}`)} )
         if (price == 0) console.error(`[Warning]: price of "${record.name}" is 0, please consider setting a proper value and time`)
         return price
-    })
+      })
   }
   else{
     console.error(`[Warning]: ${record.name} does not have an id: set a proper value and time`)
@@ -66,11 +66,11 @@ function priceof(record){
 function getInfo(name){//console.log(name)
   return new Promise((resolve, reject) => {
     getStatement.get(name, (err, record) => {
-      if (record == null) {
-        console.error(`[Warning]: ${name} not found, inserting...`)
-        addStatement.run(name, err => {if (err) console.error(`addStatement failed while adding "${name}": ${err}`)} )
-      }
-      if (err) {
+      // if (record == null) {
+      //   console.error(`[Warning]: ${name} not found, inserting...`)
+      //   addStatement.run(name, err => {if (err) console.error(`addStatement failed while adding "${name}": ${err}`)} )
+      // }
+      if ( err || (record == null) ) {
         reject(err)
         return
       }
