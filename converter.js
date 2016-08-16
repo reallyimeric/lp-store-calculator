@@ -16,7 +16,7 @@ target.run(`CREATE TABLE "main"."${tableName}" (
   "time" INTEGER DEFAULT 0)
   `, err => {
     if (err != null){
-      if (err.errno = 1){ //or .....all error's errno are 1?
+      if (err.errno == 1){ //or .....all error's errno are 1?
         console.log(`does the table already exist?`)
         console.log(`halt`)
         process.exit(1)
