@@ -27,7 +27,7 @@ function calculate(proposal) {//console.log(proposal);
   let itemCostAll = 0       //Insteading of the old "itemCost", “itemCostAll” is now the price of all the required items
   const itemCostPromises = proposal.require.map(costCal)
   Promise.all(itemCostPromises).then(itemCosts => {
-    itemCosts.forEach(itemCost => itemCostAll + itemCost)     //now "itemCost" is an element of array "itemCosts"
+    itemCosts.forEach(itemCost => itemCostAll += itemCost)     //now "itemCost" is an element of array "itemCosts"
     let cost = proposal.isk + itemCostAll
     let lpRatio = price.then(price => proposal.lp / ((price - cost) / 100000000 ))
     lpRatio.then(lpRatio => console.log(`${proposal.prize}*${proposal.quantity} lp: ${proposal.lp} Ratio:${lpRatio}`))
