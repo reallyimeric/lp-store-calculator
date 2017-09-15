@@ -40,14 +40,16 @@ const statement = target.prepare(`INSERT INTO ${tableName} (id, name) VALUES (?1
 target.parallelize()
 console.log('Start...')
 const timestamp = new Date().getTime()
-for (let index = 2; index != 17526 + 1 ; index++)
-{
-  let id = sheet0[`A${index}`].v
-  let name
-  try{name = sheet0[`B${index}`].v}catch(err){name = ''}
+
+const maxRowString = sheet0['!ref'].split(":").pop().replace(/[A-Z]+/,'')
+const maxRow = Number.parseInt(maxRowString, 10)
+
+for (let index = 2; index !== maxRow + 1; index++) {
+  const id = sheet0[`A${index}`].v
+  const name = sheet0[`B${index}`].v
   statement.run(id, name, commonErrorHandler)
-  // console.log(`${index} -- ${name} = ${id}`)
 }
+
 target.serialize()
 statement.finalize()
 target.close(() => console.log(`Database time cost: ${(new Date().getTime() - timestamp)/1000}s`))
